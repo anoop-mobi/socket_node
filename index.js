@@ -2,7 +2,10 @@ const express = require('express');
 var cors = require('cors')
 const socketio = require('socket.io');
 const app = express();
+const bodyParser = require('body-parser');
+
 app.use(cors());
+app.use(bodyParser.json());
 const server = app.listen(1337, '0.0.0.0', () => {
     console.log('Server running!')
 })
@@ -26,3 +29,10 @@ app.get('/', (req, res) => {
 });
 
 app.use(express.static(path.resolve(__dirname, 'client')));
+
+app.post('/api/send-notification', (req, res) => {
+    const data = req.body; // Assuming the data is in the request body
+    console.log('Received data:', data);
+    io.emit('notification', JSON.stringify(data)); // Emit the notification event
+    res.status(200).send('Notification sent successfully');
+});

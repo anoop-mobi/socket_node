@@ -11,7 +11,7 @@ socket.on('notification', (data) => {
     if(elementsList){
         const node = document.createElement("li");
         const formattedData = JSON.parse(data)
-        const textnode = document.createTextNode(`Name: ${formattedData.name}, Age: ${formattedData.age}`);
+        const textnode = document.createTextNode(`Message: ${formattedData.message}, Sender: ${formattedData.sender}`);
         node.appendChild(textnode);
         elementsList.appendChild(node);
     }
